@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<style>
+a 	{
+	text-decoration:none;
+	}
+
+@font-face {
+  font-family: 'Droid Sans';
+  src: url('DroidSans.eot'); /* IE 5-8 */ 
+  src: local('?'),             /* sneakily trick IE */
+        url('DroidSans.woff') format('woff'),    /* FF 3.6, Chrome 5, IE9 */
+        url('DroidSans.ttf') format('truetype'), /* Opera, Safari */
+        url('DroidSanst.svg#webfont') format('svg'); /* iOS */
+		}
+
+		p,h1, h2, h3,table td { font-family: 'Droid Sans', 'Arial', 'Helvetica', sans-serif;}
+
+#specific-cell {
+        padding-left: 20px;
+    }
+	
+.box  { margin:10px; text-align:center; }
+</style>
+
+<SCRIPT LANGUAGE="JavaScript">
+function showDate()
+{
+	var now = new Date();
+	var days = new Array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
+	var months = new Array('January','February','March','April','May','June','July','August','September','October','November','December');
+	var date = ((now.getDate()<10) ? "0" : "")+ now.getDate();
+	function fourdigits(number)
+	{
+		return (number < 1000) ? number + 1900 : number;
+	}
+	
+	tnow=new Date();
+	thour=now.getHours();
+	tmin=now.getMinutes();
+	tsec=now.getSeconds();
+	
+	if (tmin<=9) { tmin="0"+tmin; }
+	if (tsec<=9) { tsec="0"+tsec; }
+	if (thour<10) { thour="0"+thour; }
+	
+	today = days[now.getDay()] + ", " + date + " " + months[now.getMonth()] + " " + thour + ":" + tmin +"Hrs" ;
+	document.getElementById("dateDiv").innerHTML = today;
+}
+setInterval("showDate()", 1000);
+
+$( '.box' ).each(function ( i, box ) {
+
+    var width = $( box ).width(),
+        html = '<span style="white-space:nowrap">',
+        line = $( box ).wrapInner( html ).children()[ 0 ],
+        n = 100;
+    
+    $( box ).css( 'font-size', n );
+
+    while ( $( line ).width() > width ) {
+        $( box ).css( 'font-size', --n );
+    }
+
+    $( box ).text( $( line ).text() );
+
+});
+
+
+
+</script>
+<head>
+<title>{{ headlines }} </title>
+
+<div style="position:absolute;left:0px;top:0px;right:0px;width:1349px;padding:0;height:100px; background-color:#000000;float:left;margin-top:0px;margin-left:0px">
+<table style="width:100%;height:100%; background-color:#000000;" cellspacing="0" cellpadding="3">
+<tr>
+<td style="width:15%;"></td>
+<td rowspan="3"style="width:70%;"><a href="/Ceryx/"><img src="{{STATIC_URL}}img/bg1.png" height="70"></a>
+<td style="text-align:center;"></br><a href="/Ceryx/"><font color="#FFFFFF" size="4">home</font></a></td>
+<td style="text-align:center;"></br><a href="/Ceryx/aboutUs"><font color="#FFFFFF" size="4">about us</font></a></td>
+<td style="text-align:center;"></br><a href="/Ceryx/blog"><font color="#FFFFFF" size="4">blog</font></a></td>
+<td style="width:2%;"></td>
+</tr>
+
+<tr>
+<form id="cse-search-box" action="http://google.com/cse">
+<td></td>
+<td align="right"><input type="image" name="sa" src="{{STATIC_URL}}img/bg3.jpg" height="20"/></td>
+<td colspan="2">
+  <input type="hidden" name="cx" value="017641060535783529175:xdcsstvs97o" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" shape="rect" size="15" style="background-color:#808080;border:2px solid;border-radius:5px;"/>
+</td>
+<td></td>
+</form>
+</tr>
+</table>
+</div>
+</head>
+<body>
+
+<div style="position:absolute;left:0px;top:0px;width:1350px;padding:0;height:100px; background-color:#000000;float:left;margin-top:0px;margin-left:0px">
+<table style="width:100%;height:100%; background-color:#000000;" cellspacing="0" cellpadding="3">
+<tr>
+<td style="width:15%;"></td>
+<td rowspan="3"style="width:70%;"><a href="/Ceryx/"><img src="{{STATIC_URL}}img/bg1.png" height="70"></a>
+<td style="text-align:center;"></br><a href="/Ceryx/"><font color="#FFFFFF" size="4">home</font></a></td>
+<td style="text-align:center;"></br><a href="/Ceryx/aboutUs"><font color="#FFFFFF" size="4">about us</font></a></td>
+<td style="text-align:center;"></br><a href="/Ceryx/blog"><font color="#FFFFFF" size="4">blog</font></a></td>
+<td style="width:2%;"></td>
+</tr>
+<tr>
+<form id="cse-search-box" action="http://google.com/cse">
+<td></td>
+<td align="right"><input type="image" name="sa" src="{{STATIC_URL}}img/bg3.jpg" height="20"/></td>
+<td colspan="2">
+  <input type="hidden" name="cx" value="017641060535783529175:xdcsstvs97o" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" shape="rect" size="15" style="background-color:#808080;border:2px solid;border-radius:5px;"/>
+</td>
+<td></td>
+</form>
+</tr>
+</table>
+</div>
+
+<div style="width:942px;height:40px;margin-left:15%;float:left;margin-top:90px">
+<table style="width:100%;height:25px" cellspacing="0">
+<tr>
+{% for bg in bgcolor %}
+	{% for ct in categories %}
+		{% if forloop.counter == forloop.parentloop.counter %}
+		<td style="background-color:{{ bg }};text-align:center;width:11%;"><a href="/Ceryx/{{ ct }}"><font color="#FFFFFF" size="4" >{{ ct }}</font></a></td>
+		{% endif %}
+	{% endfor %}
+{% endfor %}
+</tr>
+</table>
+</div>
+<div style="position:absolute;top:140px;height:250px;margin-left:15%;height:200px;width:230px;shape:rect;size:150;border-radius:5px;border:2px solid;border-color:{{theme}};padding:10px;vertical-align:center;vertical-align:middle;">
+<font color={{theme}} size="8px" >top</font><br><font color={{theme}} size="10px" >trends</font></div>
+<div  style="position:absolute;top:220px;height:200px;margin-left:480px;float:left;background-color:#ffffff;height:120px;width:620px;">
+<font color={{theme}} size="10px" >{{category}}</font>
+<hr size="5" color="#323433"></hr>
+<font color={{theme}} size="7px"><b>happening now</b></font>
+</div>
+
+<div style="position:absolute;top:550px;margin-left:15%;height:30px;width:210px;vertical-align:middle;padding:10px">
+<font color="#000000" size="5px" >Trending Around The World</font></div>
+<div style="position:absolute;top:620px;margin-left:15%;height:50px;width:210px;background-color:{{theme}};padding-left:10px;padding-bottom:10px;padding-right:10px;">
+</br><font color="#FFFFFF" size="5px" >{{ trend }}</font></div>
+<div id="dateDiv" style="font-size:20px;position:absolute;top:680px;margin-left:15%;height:50px;width:210px;background-color:#FFFFFF;padding-left:10px;padding-bottom:10px;padding-right:10px;"></div>
+
+<div  style="position:absolute;top:440px;height:1200px;margin-left:480px;float:left;background-color:#ffffff;height:1200px;width:620px;">
+<font color="{{fontcolor}}" size="10px" >{{ headline }}</font>
+<hr size="5" color="{{ line }}"></hr>
+<font color="#000000" size="4px">{{ story }}</font>
+</br></br>
+</br></br>
+<a href ="{{ link }} " > <font color="#000000" size="3px"><b>read more..</b></font> </a>
+</div>
+
+<div style="width:942px;margin-left:15%;height:300px;background-color:#FFFFFF;position:absolute;top:900px">
+<table cellpadding="15" style="background-color:#232323;" >
+<tr>
+	<td style="width:33.33%;text-allign:left; vertical-align:top; border-right-width:1px; border-right-style:solid; border-right-color:#FCD4EB;"></br><font color="#089EB4" size="4pt">Grace Foundation</font><br/><font color="#FCD4EB" size="3 pt">Ahmedabad</font><br/><font color="#FFFFFF" size="1pt">All Rights Reserved Grace News is a subsidary of the Grace Foundation Ahmedabad.<br></br>The Ceryx Engine and all technologies associated with the web service are licensed under Grace Foundation</br></td>
+	<td style="width:16.66%;text-allign:left; vertical-align:top; border-right-width:1px; border-right-style:solid; border-right-color:#FCD4EB;">
+	</br>&#160&#160&#160&#160&#160 <a href="/Ceryx/"><font color="#FFFFFF" size="2pt" align="right">home</font></a>
+	</br>&#160&#160&#160&#160&#160 <a href="/Ceryx/aboutUs"><font color="#FFFFFF" size="2pt">about us</font></a>
+	</br>&#160&#160&#160&#160&#160 <a href="/Ceryx/ourTechnology"><font color="#FFFFFF" size="2pt">our technology</font></a>
+	</br>&#160&#160&#160&#160&#160 <a href="/Ceryx/blog"><font color="#FFFFFF" size="2pt">the blog</font></a>
+	</td>
+	<td style="width:16.66%;text-allign:left; vertical-align:top; border-right-width:1px; border-right-style:solid; border-right-color:#FCD4EB;">
+	</br><font color="#089EB4" size="2pt" align="right"><b>NAVIGATE</b></font></br>
+	&#160&#160&#160&#160&#160 <a href="/Ceryx/world"><font color="#FFFFFF" size="2pt">World</font></a></br>
+	&#160&#160&#160&#160&#160 <a href="/Ceryx/sports"><font color="#FFFFFF" size="2pt">Sports</font></a></br>
+	&#160&#160&#160&#160&#160 <a href="/Ceryx/politics"><font color="#FFFFFF" size="2pt">Politics</font></a></br>
+	&#160&#160&#160&#160&#160 <a href="/Ceryx/business"><font color="#FFFFFF" size="2pt">Business</font></a></br>
+	&#160&#160&#160&#160&#160 <a href="/Ceryx/media"><font color="#FFFFFF" size="2pt">Media</font></a></br>
+	&#160&#160&#160&#160&#160 <a href="/Ceryx/technology"><font color="#FFFFFF" size="2pt">Technology</font></a></br>
+	&#160&#160&#160&#160&#160 <a href="/Ceryx/lifestyle"><font color="#FFFFFF" size="2pt">Lifestyle</font></a></td>
+	<td style="width:33.33%;text-allign:left; vertical-align:top;"></br><font color="#089EB4" size="2pt" align="right"><b>FOLLOW US</b></font></br><font color="#FFFFFF" size="2pt">&#160&#160&#160&#160&#160 Facebook</br>&#160&#160&#160&#160&#160 Twitter</br>&#160&#160&#160&#160&#160 Google+</br>&#160&#160&#160&#160&#160 Tumbler
+	<br/><br/><br/><br/><br/><br/><img src="{{STATIC_URL}}img/bg1.png" height="30"><img style="margin-left:13%" src="{{STATIC_URL}}img/bg16.png" height="100" width="140"></td></tr>
+</table>
+</div>
+</body>
+</html>
